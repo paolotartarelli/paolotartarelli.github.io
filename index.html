@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Paolo Tartarelli</title>
+
+  <style>
+
+    :root {
+      --blue: #264653;
+      --blue-light: #486b75;
+
+      --black: #171717;
+      --grey: #707679;
+
+      --background: #f7f8f7;
+
+      --light-grey: #dfe3e3;
+      --very-light-grey: #eef1f1;
+
+      --wp-bg: #264653;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--black);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 72px 40px 50px 40px;
+    }
+
+    /* ---------------- TOP ---------------- */
+
+    .top {
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      font-weight: 500;
+      margin: 0 0 28px 0;
+      color: var(--blue);
+    }
+
+    .intro {
+      max-width: 650px;
+    }
+
+    .intro p {
+      font-size: 15px;
+      margin: 0 0 18px 0;
+      text-align: justify;
+    }
+
+    .photo {
+      float: right;
+
+      width: 280px;
+      height: 345px;
+
+      object-fit: cover;
+      object-position: center top;
+
+      display: block;
+
+      /* Solo leggermente più alta rispetto al testo */
+      margin: -25px 0 0 60px;
+    }
+
+    /* ---------------- MAIN LINKS ---------------- */
+
+    .links {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: 0.2s ease;
+    }
+
+    .links a:hover {
+      color: var(--blue-light);
+      border-bottom-color: var(--blue-light);
+    }
+
+    /* ---------------- SECTION HEADERS ---------------- */
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: var(--blue);
+    }
+
+    .section-line {
+      height: 1px;
+      background: var(--light-grey);
+      flex: 1;
+    }
+
+    /* ---------------- RESEARCH ---------------- */
+
+    .research {
+      margin-bottom: 62px;
+    }
+
+    /*
+      Research non può mai salire accanto
+      o sotto la foto.
+    */
+    .research > .section-header {
+      clear: both;
+    }
+
+    .research-group {
+      margin-bottom: 34px;
+    }
+
+    /* ---------------- WORKING PAPERS ---------------- */
+
+    .paper {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+
+      padding: 21px 0;
+
+      border-top: 1px solid var(--light-grey);
+    }
+
+    /* Niente doppia linea sotto Research */
+
+    .research-group .paper:first-child {
+      border-top: none;
+    }
+
+    .paper:last-child {
+      border-bottom: 1px solid var(--light-grey);
+    }
+
+    /* ---------------- MINI COVER ---------------- */
+
+    .paper-cover {
+      width: 66px;
+      height: 88px;
+      padding: 9px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      border-radius: 2px;
+
+      font-size: 8px;
+      line-height: 1.3;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .paper-cover .cover-number {
+      font-size: 9px;
+      opacity: 0.65;
+    }
+
+    .paper-cover .cover-line {
+      width: 17px;
+      height: 1px;
+
+      background: currentColor;
+
+      opacity: 0.35;
+
+      margin-top: auto;
+      margin-bottom: 7px;
+    }
+
+    .paper-cover .cover-type {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+    }
+
+    .cover-wp {
+      background: var(--wp-bg);
+      color: white;
+    }
+
+    /* ---------------- PAPER TEXT ---------------- */
+
+    .paper-title {
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 500;
+
+      margin-bottom: 5px;
+
+      color: var(--black);
+
+      width: 100%;
+      max-width: none;
+
+      letter-spacing: -0.1px;
+    }
+
+    /* Titolo intero su una riga su desktop */
+
+    @media (min-width: 1000px) {
+
+      .paper-title {
+        white-space: nowrap;
+      }
+
+    }
+
+    .paper-authors {
+      color: var(--grey);
+      font-size: 13px;
+      margin-bottom: 9px;
+    }
+
+    .paper-authors strong {
+      color: #4c5254;
+      font-weight: 600;
+    }
+
+    .paper-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .paper-links a,
+    .paper-button {
+      font-size: 12px;
+      color: var(--blue);
+
+      background: none;
+      border: none;
+      padding: 0;
+
+      font-family: inherit;
+
+      cursor: pointer;
+
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .paper-links a:hover,
+    .paper-button:hover {
+      color: var(--blue-light);
+    }
+
+    /* ---------------- EXPANDABLE PANELS ---------------- */
+
+    .expandable {
+      max-height: 0;
+      opacity: 0;
+
+      overflow: hidden;
+
+      transform: translateY(-4px);
+
+      margin-top: 0;
+
+      transition:
+        max-height 0.5s ease,
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        margin-top 0.35s ease;
+    }
+
+    .expandable.open {
+      max-height: 2000px;
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+      margin-top: 14px;
+    }
+
+    .expandable-inner {
+      padding: 15px 18px;
+
+      background: var(--very-light-grey);
+
+      border-left: 3px solid var(--blue);
+
+      color: #50575a;
+
+      font-size: 13px;
+      line-height: 1.65;
+
+      min-height: 48px;
+    }
+
+    .abstract .expandable-inner {
+      text-align: justify;
+    }
+
+    /* ---------------- CONFERENCES ---------------- */
+
+    .conference-item {
+      margin-bottom: 9px;
+
+      display: flex;
+      align-items: flex-start;
+
+      gap: 9px;
+    }
+
+    .conference-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .flag {
+      width: 18px;
+      height: 13px;
+
+      object-fit: cover;
+
+      border-radius: 1px;
+
+      flex-shrink: 0;
+
+      margin-top: 4px;
+    }
+
+    .conference-role {
+      display: inline-block;
+
+      margin-left: 6px;
+
+      padding: 1px 6px;
+
+      border-radius: 10px;
+
+      font-size: 9px;
+      line-height: 1.5;
+
+      vertical-align: 1px;
+    }
+
+    .conference-role.invited {
+      background: var(--blue);
+      color: white;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    /* ---------------- CONTACT ---------------- */
+
+    .contact {
+      margin-bottom: 55px;
+    }
+
+    .contact-content {
+      max-width: 600px;
+
+      font-size: 14px;
+
+      color: #444;
+    }
+
+    .contact a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      color: var(--blue-light);
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer {
+      margin-top: 60px;
+
+      padding-top: 18px;
+
+      border-top: 1px solid var(--light-grey);
+
+      color: #929799;
+
+      font-size: 11px;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 760px) {
+
+      .container {
+        padding: 40px 22px;
+      }
+
+      .top {
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .photo {
+        float: none;
+
+        width: 220px;
+        height: auto;
+
+        margin: 0 0 26px 0;
+      }
+
+      .paper {
+        grid-template-columns: 62px minmax(0, 1fr);
+
+        gap: 16px;
+
+        padding: 18px 0;
+      }
+
+      .paper-cover {
+        width: 56px;
+        height: 76px;
+
+        padding: 7px;
+      }
+
+      .paper-cover .cover-type {
+        font-size: 7px;
+      }
+
+      .paper-title {
+        font-size: 17px;
+
+        white-space: normal;
+
+        letter-spacing: 0;
+      }
+
+      .paper-authors {
+        font-size: 12px;
+      }
+
+      .paper-links a,
+      .paper-button {
+        font-size: 11px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ==========================
+       TOP
+  =========================== -->
+
+  <div class="top">
+
+    <img
+      src="photo.jpg"
+      alt="Paolo Tartarelli"
+      class="photo"
+    >
+
+    <div class="intro">
+
+      <h1>Paolo Tartarelli</h1>
+
+      <p>
+        Most of my work concerns the interplay between market structure, market power, firm behaviour, and distributive dynamics. Methodologically, I draw on microeconometrics, including quasi-experimental techniques, as well as computational and data-driven approaches, particularly agent-based modelling.
+      </p>
+
+      <div class="links">
+
+        <a href="mailto:p.tartarelli@unimc.it">
+          p.tartarelli@unimc.it
+        </a>
+
+        <a href="cv.pdf" target="_blank">
+          CV
+        </a>
+
+        <a href="#">
+          Google Scholar
+        </a>
+
+        <a href="teaching.html">
+          Teaching
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================
+       RESEARCH
+  =========================== -->
+
+  <section class="research">
+
+    <div class="section-header">
+
+      <h2>Research</h2>
+
+      <div class="section-line"></div>
+
+    </div>
+
+    <div class="research-group">
+
+      <!-- PAPER 1 -->
+
+      <div class="paper">
+
+        <div class="paper-cover cover-wp">
+
+          <div class="cover-number">
+            01
+          </div>
+
+          <div class="cover-line"></div>
+
+          <div class="cover-type">
+            Working<br>
+            Paper
+          </div>
+
+        </div>
+
+        <div class="paper-content">
+
+          <div class="paper-title">
+            Microdynamics of Joint Monopoly-Monopsony Power: Markups, Markdowns, and Cross-Market Interactions
+          </div>
+
+          <div class="paper-authors">
+            <strong>Paolo Tartarelli</strong>,
+            Fabio Clementi
+          </div>
+
+          <div class="paper-links">
+
+            <button
+              class="paper-button"
+              onclick="togglePanel(this, 'abstract')"
+              aria-expanded="false"
+            >
+              Abstract
+            </button>
+
+            <button
+              class="paper-button"
+              onclick="togglePanel(this, 'conferences')"
+              aria-expanded="false"
+            >
+              Conferences
+            </button>
+
+          </div>
+
+          <div class="expandable abstract">
+
+            <div class="expandable-inner">
+              Using AIDA data for the period 2015–2024, the paper conducts a multisectoral analysis of the Italian economy to investigate the microdynamics of joint monopoly and monopsony power. The analysis focuses on how the distributions of these two dimensions of market power, as well as their combination, relate to competitive processes, market structures, and their co-evolution. Markups and markdowns are measured using indicators inspired by a structuralist approach and designed to rely as little as possible on restrictive theoretical assumptions. These measures are compared with estimates obtained through a production-function approach relying on stronger structural assumptions, based on control-function estimation and nonlinear GMM, using lagged inputs as instruments. The inferential analysis examines the association between firms’ relative positions in product and labour markets, market concentration, and the wedges capturing the corresponding dimensions of market power, with particular attention to cross-market interactions. This allows us to assess whether stronger positions in one market are systematically associated with greater market power in the other. In parallel, the paper investigates the shape, persistence, and evolution of the distributions of markups, markdowns, and joint market power, relating their characteristics to the competitive processes underlying firm heterogeneity. Finally, these distributional dynamics are connected to changes in cross-market structures to examine how firms accumulate and reinforce their relative positions across product and labour markets, and whether such processes contribute to the persistence and co-evolution of monopoly and monopsony power.
+            </div>
+
+          </div>
+
+          <div class="expandable conferences">
+
+            <div class="expandable-inner">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PAPER 2 -->
+
+      <div class="paper">
+
+        <div class="paper-cover cover-wp">
+
+          <div class="cover-number">
+            02
+          </div>
+
+          <div class="cover-line"></div>
+
+          <div class="cover-type">
+            Working<br>
+            Paper
+          </div>
+
+        </div>
+
+        <div class="paper-content">
+
+          <div class="paper-title">
+            Macrodynamics of Joint Monopoly-Monopsony Power: An Agent-Based Model
+          </div>
+
+          <div class="paper-authors">
+            <strong>Paolo Tartarelli</strong>,
+            Luca Riccetti,
+            Gilberto Tadeu Lima
+          </div>
+
+          <div class="paper-links">
+
+            <button
+              class="paper-button"
+              onclick="togglePanel(this, 'abstract')"
+              aria-expanded="false"
+            >
+              Abstract
+            </button>
+
+            <button
+              class="paper-button"
+              onclick="togglePanel(this, 'conferences')"
+              aria-expanded="false"
+            >
+              Conferences
+            </button>
+
+          </div>
+
+          <div class="expandable abstract">
+
+            <div class="expandable-inner">
+              This paper develops a stock-flow-consistent agent-based model to study the joint determination of monopoly power in product markets and monopsony power in labour markets, the interaction between the two dimensions of market power, and their distributive dynamics. Firms exercise market power through a price markup and a wage markdown, both constructed using the same functional form applied symmetrically to the two sides. The model is assessed through computer simulations and, across multiple Monte Carlo replications, is able to reproduce several stylized facts concerning labour-market dynamics and firm-level characteristics. A series of economic experiments provides further insights. The first links employer market power to the functional distribution of income, showing that a larger number of outside options available to workers engaging in job-to-job search reduces the wage markdown and increases the labour share, with diminishing marginal effects. The second mirrors the same mechanism on the product-market side, showing that a narrower consumer search breadth monotonically raises the price markup and reduces the labour share, although in this case the effect is partly offset by a decline in the wage markdown, illustrating how a change originating in one market can propagate throughout the economy. A third experiment shows that an aggregate demand shock has sizeable effects on monopsony power but only negligible effects on product-market power, suggesting that monopsony power is comparatively more sensitive to the business cycle than monopoly power. Fourth, we investigate the direction of interaction between the two forms of market power. An exogenous increase in the price markup also raises the wage markdown through a distributive channel operating via a compressed labour share and weaker aggregate demand, whereas an exogenous increase in the wage markdown leaves the price markup essentially unchanged. Overall, the experimental results are robust to a range of robustness checks, and the model portrays monopoly and monopsony power as jointly determined and interconnected through the functional distribution of income.
+            </div>
+
+          </div>
+
+          <div class="expandable conferences">
+
+            <div class="expandable-inner">
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/de.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>Sep 2026</strong> — 12th Meeting of the German Network for Economic Dynamics (GENED) — Bielefeld University, Germany
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/ch.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>Sep 2026</strong> — 38th European Association for Evolutionary Political Economy (EAEPE) Annual Conference — University of Lausanne, Switzerland
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/it.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>Jun 2026</strong> — XXX Workshop on Economics with Heterogeneous Interacting Agents (WEHIA) and Econophysics Colloquium — Marche Polytechnic University, Ancona, Italy
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/br.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>May 2026</strong> — 2nd Association for Evolutionary Economics (AFEE) South American Conference — São Paulo State University, Araraquara, Brazil
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/br.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>May 2026</strong> — 7th Research Center on Macroeconomics of Inequalities (MADE) Academic Seminar — University of São Paulo, Brazil
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/br.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>Apr 2026</strong> — Applied Macroeconomics Research Group (GEMAP) Research Meeting — State University of Campinas, Brazil
+                </span>
+              </div>
+
+              <div class="conference-item">
+                <img
+                  src="https://flagcdn.com/w40/br.png"
+                  class="flag"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <span>
+                  <strong>Feb 2026</strong> — 3rd Agent-Based Macroeconomics Workshop (ABMW) — Federal University of Rio de Janeiro, Brazil
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ==========================
+       CONTACT
+  =========================== -->
+
+  <section class="contact">
+
+    <div class="section-header">
+
+      <h2>Contact</h2>
+
+      <div class="section-line"></div>
+
+    </div>
+
+    <div class="contact-content">
+
+      Department of Economics and Law
+      <br>
+
+      University of Macerata
+      <br>
+
+      Via Crescimbeni 14, Macerata
+
+      <br><br>
+
+      <a href="mailto:p.tartarelli@unimc.it">
+        p.tartarelli@unimc.it
+      </a>
+
+    </div>
+
+  </section>
+
+  <footer>
+    Paolo Tartarelli
+  </footer>
+
+</div>
+
+<script>
+
+  function togglePanel(button, panelClass) {
+
+    const paperContent =
+      button.closest(".paper-content");
+
+    const panel =
+      paperContent.querySelector("." + panelClass);
+
+    const otherPanels =
+      paperContent.querySelectorAll(".expandable");
+
+    const otherButtons =
+      paperContent.querySelectorAll(".paper-button");
+
+    otherPanels.forEach(function(item) {
+
+      if (item !== panel) {
+        item.classList.remove("open");
+      }
+
+    });
+
+    otherButtons.forEach(function(item) {
+
+      if (item !== button) {
+        item.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+
+    });
+
+    panel.classList.toggle("open");
+
+    const isOpen =
+      panel.classList.contains("open");
+
+    button.setAttribute(
+      "aria-expanded",
+      isOpen
+    );
+
+  }
+
+</script>
+
+</body>
+
+</html>
